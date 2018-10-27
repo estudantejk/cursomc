@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Produto implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -22,7 +24,7 @@ public class Produto implements Serializable{
 	private String nome;
 	private Double preco;
 	
-	
+	@JsonBackReference//diz que do outro lado da associação os objetos já foram buscados cortando assim a referencia ciclica.
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA",
 				joinColumns = @JoinColumn(name = "produto_id"),	
