@@ -29,6 +29,9 @@ public class Cliente implements Serializable{
 	private String cpfOuCnpj;
 	private Integer tipo;
 	
+	@OneToMany(mappedBy="cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
+	
 	@JsonManagedReference//Resolvendo problema da referencia ciclica obs: é utilizado do lado que voce quer que venha os objetos associados
 	@OneToMany(mappedBy="cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
@@ -100,7 +103,15 @@ public class Cliente implements Serializable{
 	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
 	}
-	
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
