@@ -14,8 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.figueiredo.cursomc.domain.enums.TipoCliente;
 
 @Entity
@@ -30,11 +29,10 @@ public class Cliente implements Serializable{
 	private String cpfOuCnpj;
 	private Integer tipo;
 	
-	@JsonBackReference
+	@JsonIgnore//Resolvendo problema da referencia ciclica obs: é utilizado do lado que voce quer que não venha os dados
 	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
-	
-	@JsonManagedReference//Resolvendo problema da referencia ciclica obs: é utilizado do lado que voce quer que venha os objetos associados
+		
 	@OneToMany(mappedBy="cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
